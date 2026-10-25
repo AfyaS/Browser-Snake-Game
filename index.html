@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Snake Game 💕 Play in Browser</title>
+  <meta name="description" content="A cute, aesthetic retro Snake game playable in any browser. Built with HTML5 Canvas and vanilla JavaScript." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎀</text></svg>" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Press+Start+2P&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="game-container">
+    <!-- Header with Title & Stats -->
+    <header class="game-header">
+      <h1 class="game-title">SNAKE<span>.GIRL</span> 🌸</h1>
+      <div class="scoreboard">
+        <div class="score-card">
+          <span class="score-label">SCORE</span>
+          <span id="current-score" class="score-value">0</span>
+        </div>
+        <div class="score-card best">
+          <span class="score-label">BEST ✨</span>
+          <span id="high-score" class="score-value">0</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Canvas & Overlays -->
+    <div class="canvas-wrapper">
+      <canvas id="game-canvas" width="400" height="400"></canvas>
+
+      <!-- Bonus Fruit Timer Bar -->
+      <div id="bonus-bar-container" class="bonus-bar-container hidden">
+        <div id="bonus-bar" class="bonus-bar"></div>
+      </div>
+
+      <!-- Start Overlay -->
+      <div id="start-overlay" class="overlay">
+        <div class="overlay-content">
+          <div class="arcade-badge">✨ SWEET ARCADE ✨</div>
+          <h2>READY TO SLITHER? 💕</h2>
+          <p class="overlay-hint">Eat yummy treats, grow longer & shine!</p>
+          <button id="start-btn" type="button" class="btn btn-primary pulse">PLAY GAME 💖</button>
+          <div class="hint-keys">
+            <span>Desktop: Arrow Keys or W-A-S-D</span>
+            <span>Mobile: Swipe or use D-Pad below</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pause Overlay -->
+      <div id="pause-overlay" class="overlay hidden">
+        <div class="overlay-content">
+          <h2>PAUSED ⏸️</h2>
+          <p class="overlay-hint">Taking a sweet break~ Press <kbd>Space</kbd> or Resume</p>
+          <button id="resume-btn" type="button" class="btn btn-primary">RESUME 💖</button>
+        </div>
+      </div>
+
+      <!-- Game Over / Victory Overlay -->
+      <div id="game-over-overlay" class="overlay hidden">
+        <div class="overlay-content">
+          <h2 id="game-over-title" class="game-over-title">GAME OVER</h2>
+          <div class="game-over-stats">
+            <p>Score: <span id="final-score">0</span></p>
+            <p id="new-high-score-msg" class="new-best hidden">✨ NEW BEST SCORE! ✨</p>
+          </div>
+          <button id="restart-btn" type="button" class="btn btn-primary pulse">PLAY AGAIN 💕</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Control Bar -->
+    <div class="controls-bar">
+      <!-- Difficulty Selectors -->
+      <div class="difficulty-group" role="group" aria-label="Difficulty">
+        <button type="button" class="diff-btn" data-speed="140">EASY</button>
+        <button type="button" class="diff-btn active" data-speed="100">NORMAL</button>
+        <button type="button" class="diff-btn" data-speed="65">HARD</button>
+      </div>
+
+      <!-- Action Toggles -->
+      <div class="action-buttons">
+        <button id="pause-toggle-btn" type="button" class="icon-btn" title="Pause Game (Space)" aria-label="Pause Game">
+          <span id="pause-icon">⏸️</span>
+        </button>
+        <button id="sound-toggle-btn" type="button" class="icon-btn" title="Toggle Sound" aria-label="Toggle Sound">
+          <span id="sound-icon">🔊</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Touch D-Pad -->
+    <div class="mobile-controls" id="mobile-dpad">
+      <div class="dpad-row">
+        <button id="dpad-up" class="dpad-btn" aria-label="Move Up">▲</button>
+      </div>
+      <div class="dpad-row">
+        <button id="dpad-left" class="dpad-btn" aria-label="Move Left">◀</button>
+        <div class="dpad-center"></div>
+        <button id="dpad-right" class="dpad-btn" aria-label="Move Right">▶</button>
+      </div>
+      <div class="dpad-row">
+        <button id="dpad-down" class="dpad-btn" aria-label="Move Down">▼</button>
+      </div>
+    </div>
+
+    <!-- Instructions & Golden Apple Explanation Footer -->
+    <footer class="game-footer">
+      <p class="controls-text">Use <kbd>↑</kbd> <kbd>↓</kbd> <kbd>←</kbd> <kbd>→</kbd> or <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> to steer &bull; <kbd>Space</kbd> to Pause</p>
+      <div class="bonus-explainer">
+        <span class="bonus-icon">⭐</span>
+        <p class="bonus-desc"><strong>Bonus Golden Apple:</strong> Appears every 5 apples! Catch it before the top timer bar runs out for <strong>+30 bonus points</strong>!</p>
+      </div>
+    </footer>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
